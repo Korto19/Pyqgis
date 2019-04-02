@@ -1,2 +1,2 @@
-# Pyqgis
+# PyqQgis
 Snippet Python per Qgis
