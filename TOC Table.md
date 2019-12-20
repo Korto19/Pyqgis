@@ -22,3 +22,6 @@ Layer_Fetaure_Count   numero delle feature del layer (es numero di punti, linee,
 
 
 Layer_Meta_ ecc       tutti i dati dalla prima schermata dei metadati dalle proprietà del layer
+
+
+Layer_Group_Level     struttura della toc in gruppi e sottogruppi
