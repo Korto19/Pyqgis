@@ -1,6 +1,6 @@
 I campi della tabella prodotta:
 
-Layer_N               numero progressivo attribuito al layer nella scansione della TOC
+Layer_N               numero progressivo attribuito al layer nella scansione della TOC\n
 Layer_Name            nome del layer
 Layer_Crs             epsg del layer
 Layer_Type            tipo di layer come da codifica QgsLayerType
