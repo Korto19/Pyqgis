@@ -3,8 +3,8 @@
 """
 ***************************************************************************
 *                                                                         *
-*	Giulio Fattori 18.11.2019         TOCTable 		                      *
-*	                                                                      *
+*	Giulio Fattori 23.12.2019         TOCTable v 1.20                 *
+*	                                                                  *
 *   This program is free software; you can redistribute it and/or modify  *
 *   it under the terms of the GNU General Public License as published by  *
 *   the Free Software Foundation; either version 2 of the License, or     *
@@ -179,7 +179,9 @@ class TOCTABLEProcessingAlgorithm(QgsProcessingAlgorithm):
 		
         fields = QgsFields()
         fields.append(QgsField("Layer_N", QVariant.Int))                    # AA
+        fields.append(QgsField("Layer_Group_Level", QVariant.String))       # O
         fields.append(QgsField("Layer_Name", QVariant.String))              # A
+        fields.append(QgsField("Feature_Not_Valid", QVariant.Int))          # P
         fields.append(QgsField("Layer_Crs", QVariant.String))               # B
         fields.append(QgsField("Layer_Type", QVariant.Int))                 # C
         fields.append(QgsField("Layer_Type_Name", QVariant.String))         # D
@@ -191,7 +193,8 @@ class TOCTABLEProcessingAlgorithm(QgsProcessingAlgorithm):
         fields.append(QgsField("Layer_Meta_Type", QVariant.String))         # L
         fields.append(QgsField("Layer_Meta_Language", QVariant.String))     # M
         fields.append(QgsField("Layer_Meta_Abstract", QVariant.String))     # N
-        fields.append(QgsField("Layer_Group_Level", QVariant.String))       # O
+        
+        
 		
         (sink, dest_id) = self.parameterAsSink(
             parameters,
@@ -227,12 +230,19 @@ class TOCTABLEProcessingAlgorithm(QgsProcessingAlgorithm):
                     F = layer.featureCount()
                     C = layer.wkbType()
                     D = QgsWkbTypes.displayString(layer.wkbType())
+                    
+                    P = 0
+                    for f in layer.getFeatures():
+                        if not f.geometry().isGeosValid():
+                            P += 1
+                    
                 else:
                     C = (0)
                     D = QgsMapLayerType.RasterLayer.name
                     F = (-1)
+                    P = 0
                     
-                feat.setAttributes([AA,A,B,C,D,E,F,G,H,I,L,M,N,TOC_dict.get(A)])
+                feat.setAttributes([AA,TOC_dict.get(A),A,P,B,C,D,E,F,G,H,I,L,M,N])
                 sink.addFeature(feat, QgsFeatureSink.FastInsert)
         
         feedback.pushInfo ('By GF')
