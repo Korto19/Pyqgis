@@ -181,7 +181,7 @@ class TOCTABLEProcessingAlgorithm(QgsProcessingAlgorithm):
         fields.append(QgsField("Layer_N", QVariant.Int))                    # AA
         fields.append(QgsField("Layer_Group_Level", QVariant.String))       # O
         fields.append(QgsField("Layer_Name", QVariant.String))              # A
-        fields.append(QgsField("Feature_Not_Valid", QVariant.Int))          # P
+        fields.append(QgsField("Geometry_Not_Valid", QVariant.Int))         # P
         fields.append(QgsField("Layer_Crs", QVariant.String))               # B
         fields.append(QgsField("Layer_Type", QVariant.Int))                 # C
         fields.append(QgsField("Layer_Type_Name", QVariant.String))         # D
