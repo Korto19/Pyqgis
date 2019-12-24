@@ -5,7 +5,7 @@ I campi della tabella prodotta:
 * `Layer_N` numero progressivo attribuito al layer nella scansione della TOC
 * `Layer_Group_Level` struttura della toc in gruppi e sottogruppi
 * `Layer_Name` nome del layer
-* `Feature_Not_Valid` numero di feature non valide
+* `Geometry_Not_Valid` numero di geometrie non valide
 * `Layer_Crs` epsg del layer
 * `Layer_Type` tipo di layer come da codifica QgsLayerType
 * `Layer_Type_Name` tipo di layer come da codifica QgsLayerTypeName
@@ -14,4 +14,4 @@ I campi della tabella prodotta:
 * `Layer_Meta_ecc` tutti i dati dalla prima schermata dei metadati dalle proprietà del layer
 * `Layer_Group_Level` struttura della toc in gruppi e sottogruppi
 
-agg. 23.12.2019
+agg. 24.12.2019
