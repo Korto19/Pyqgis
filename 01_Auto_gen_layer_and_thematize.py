@@ -4,29 +4,39 @@ start = datetime.datetime.now()
 layer = iface.activeLayer()
 layer_prefix ='A_'                #1. inserire quello che occorre
 
-# define a lookup: value -> (random color, label)
-scale_col = {
-    '0': ("#f7fbff", '0'),
-    '1': ("#e4eff9", '1'),
-    '2': ("#d1e3f3", '2'),
-    '3': ("#bad6eb", '3'),
-    '4': ("#9ac8e1", '4'),
-    '5': ("#73b3d8", '5'),
-    '6': ("#529dcc", '6'),
-    '7': ("#3585c0", '7'),
-    '8': ("#1c6cb1", '8'),
-    '9': ("#08519c", '4'),
-    '':("#08306b",''),
-    }
+# define a lookup: value -> (color, label)
+renderer = layer.renderer()
+
+def RGBA_HEX (string_rgba):
+    x=string_rgba.split(',')
+    return  '#%02x%02x%02x' % (int(x[0]),int(x[1]),int(x[2]))
+    
+print('00 ' + layer.name())
+if layer.renderer().type() == "categorizedSymbol":
+    scale_col = {}
+    #crea il dizionario dei colori'
+    for cat in renderer.categories():
+        if str(cat.value()) != '':
+
+            index_m = str(cat.value())
+        else:
+            index_m = 'none'
+        if layer.geometryType() == 0 or layer.geometryType() == 2:
+            
+            scale_col[index_m] = RGBA_HEX(cat.symbol().symbolLayer(0).properties()['color']),index_m
+        else:
+            scale_col[index_m] = RGBA_HEX(cat.symbol().symbolLayer(0).properties()['line_color']),index_m
+print(scale_col)
     
 for field in layer.fields():
     start_l = datetime.datetime.now()
     if layer_prefix in field.name():
-        print(field.name())
+#        print('#'+field.name())
        
         for feature in layer.getFeatures():
             categories = []
             for feature[field.name()],(color, label) in scale_col.items():
+#                print('00 '+field.name(),color, label)
                 symbol = QgsSymbol.defaultSymbol(layer.geometryType())
                 symbol.setColor(QColor(color))
                 category = QgsRendererCategory(feature[field.name()], symbol, label)
