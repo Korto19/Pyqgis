@@ -1,19 +1,27 @@
-import datetime
+#Sulla base delle impostazioni di un layer categorizzato
+#ne produce una versione per ogni campo dati che abbia il
+#medesimo prefisso Es: 'A_1958' > prefisso 2 lettere 'A_' 
+#da cui tutti i campi con nome del tipo 'A_****' produrranno 
+#un layer tematizzato in funzione del campo 'A_****'
 
+import datetime
 start = datetime.datetime.now()
 layer = iface.activeLayer()
-layer_prefix ='A_'                #1. inserire quello che occorre
+prefix_lenght = 2              #1. inserire lunghezza prefisso del campo
 
-# define a lookup: value -> (color, label)
-renderer = layer.renderer()
-
+# funzione di conversione da RGBA a HEX
 def RGBA_HEX (string_rgba):
     x=string_rgba.split(',')
     return  '#%02x%02x%02x' % (int(x[0]),int(x[1]),int(x[2]))
     
-print('00 ' + layer.name())
+# define a lookup: value -> (color, label)    
+#print('00 ' + layer.name())
+renderer = layer.renderer()
 if layer.renderer().type() == "categorizedSymbol":
     scale_col = {}
+    # recupera il campo di tematizzazione e ne estrae il prefisso
+    layer_prefix = renderer.legendClassificationAttribute()[0:prefix_lenght]
+#    print('pp '+ layer_prefix)
     #crea il dizionario dei colori'
     for cat in renderer.categories():
         if str(cat.value()) != '':
@@ -26,7 +34,7 @@ if layer.renderer().type() == "categorizedSymbol":
             scale_col[index_m] = RGBA_HEX(cat.symbol().symbolLayer(0).properties()['color']),index_m
         else:
             scale_col[index_m] = RGBA_HEX(cat.symbol().symbolLayer(0).properties()['line_color']),index_m
-print(scale_col)
+#print(scale_col)
     
 for field in layer.fields():
     start_l = datetime.datetime.now()
@@ -54,7 +62,8 @@ for field in layer.fields():
         lyr1_clone.setRenderer(renderer)
         lyr1_clone.triggerRepaint()
         
-            
+        
+# parte opzionale per messaggio ad ogni elaborazione, utile se molti dati
 #        msg = QMessageBox()
         elapsed_l = datetime.datetime.now() - start_l
 #        msgtext=  f'{field.name()}\n{elapsed}'
@@ -67,7 +76,10 @@ for field in layer.fields():
         
         """ spegne layer"""
         QgsProject.instance().layerTreeRoot().findLayer(lyr1_clone).setItemVisibilityChecked(False)
-        print(elapsed_l)
-#        print('u ' + str(ret))
+        QgsProject.instance().layerTreeRoot().findLayer(lyr1_clone).setExpanded(False)
+        print('Layer ' +lyr1_clone.name() + ' time elaboration ' + str(elapsed_l))
+        
+# parte opzionale per messaggio ad ogni elaborazione, utile se molti dati
 #        if ret == QMessageBox.Close: break
-print(datetime.datetime.now() - start)
+
+print('Total Time elapsed ' + str(datetime.datetime.now() - start))
