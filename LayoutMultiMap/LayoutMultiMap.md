@@ -1,3 +1,4 @@
+
 # LAYOUT MULTI MAP 
 
 Questa procedura consistente nell'esecuzione successiva di due script:
@@ -31,5 +32,3 @@ permette la realizzazione di una composizione con n mappe su di un unico layout.
 
 ## FILE DI ESEMPIO
 * nella cartella examples il db `MultiMap.gpkg` di esempio.
-
-<!-- TOC -->autoauto- [LAYOUT MULTI MAP](#layout-multi-map)auto    - [Elementi di partenza](#elementi-di-partenza)auto    - [SCRIPT](#script)auto        - [Script1  `01_Auto_gen_layer_and_thematize.py`](#script1--01_auto_gen_layer_and_thematizepy)auto        - [Script `02_Auto_composer_ multiple_map_layout.py`](#script-02_auto_composer_-multiple_map_layoutpy)auto        - [Dimensione delle mappe](#dimensione-delle-mappe)auto    - [FILE DI ESEMPIO](#file-di-esempio)autoauto<!-- /TOC -->
