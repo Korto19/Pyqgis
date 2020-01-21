@@ -27,7 +27,7 @@ permette la realizzazione di una composizione con n mappe su di un unico layout.
 * Ad esecuzione avvenutà si otterrà una composizione di stampa con mappe multiple.
 * 
 ### Dimensione delle mappe
-* Per adeguare la dimensione della mappa in stampa occorre, per adesso, opportunamente zoomare sulla mappa nel canvas
+* Per adeguare la dimensione della mappa in stampa occorre, per adesso, opportunamente zoomare sulla mappa nel canvas.
 
 ## FILE DI ESEMPIO
-* nella cartella examples il db `MultiMap.gpkg` di esempio
+* nella cartella examples il db `MultiMap.gpkg` di esempio.
