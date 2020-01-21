@@ -29,4 +29,4 @@ permette la realizzazione di una composizione con n mappe su di un unico layout.
 * Per adeguare la dimensione della mappa in stampa occorre,per adesso, opportunamente zoomare sulla mappa nel canvas
 
 ## FILE DI ESEMPIO
-* nella cartela examples il db `MultiMap.gpkg` di esempio
+* nella cartella examples il db `MultiMap.gpkg` di esempio
