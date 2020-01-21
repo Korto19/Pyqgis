@@ -9,7 +9,7 @@ permette la realizzazione di una composizione con n mappe su di un unico layout.
 ## Elementi di partenza
 
 * Occorre un layer categorizzato in base ad un campo che abbia una parte in comune con gli altri n campi ad esempio come nella figura seguente:
-![AHI](./Images/Field_Table.png)
+![AHI](./Images/Field_Table.PNG)
     
      dove 'A_' è il prefisso comune a tutti i campi
 * quel che determinerà il numero di campi che produrranno i relativi layer è la lunghezza del prefisso infatti se con 'A_' otterrò tutti gli anni con 'A_195', ad esempio, otterrò solo due anni e quindi solo due layer uno relativo al 1958 ed uno relativo al 1959.
@@ -26,7 +26,7 @@ permette la realizzazione di una composizione con n mappe su di un unico layout.
 * Ad esecuzione avvenutà si otterrà una composizione di stampa con mappe multiple.
 * 
 ### Dimensione delle mappe
-* Per adeguare la dimensione della mappa in stampa occorre,per adesso, opportunamente zoomare sulla mappa nel canvas
+* Per adeguare la dimensione della mappa in stampa occorre, per adesso, opportunamente zoomare sulla mappa nel canvas
 
 ## FILE DI ESEMPIO
 * nella cartella examples il db `MultiMap.gpkg` di esempio
