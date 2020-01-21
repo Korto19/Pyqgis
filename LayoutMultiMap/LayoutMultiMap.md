@@ -9,7 +9,7 @@ permette la realizzazione di una composizione con n mappe su di un unico layout.
 ## Elementi di partenza
 
 * Occorre un layer categorizzato in base ad un campo che abbia una parte in comune con gli altri n campi ad esempio come nella figura seguente:
-![](./Images/Field%20Table.png)
+![](./Images/Field Table.png)
     
      dove 'A_' è il prefisso comune a tutti i campi
 * quel che determinerà il numero di campi che produrranno i relativi layer è la lunghezza del prefisso infatti se con 'A_' otterrò tutti gli anni con 'A_195', ad esempio, otterrò solo due anni e quindi solo due layer uno relativo al 1958 ed uno relativo al 1959.
