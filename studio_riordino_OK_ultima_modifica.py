@@ -1,5 +1,5 @@
 # ORDINAMENTO PER TIPO E PER NOME ASCENDENTE
-# se si vuone decrescente porre reverse=True alla linea 57
+# se si vuole decrescente porre reverse = True alla linea 57
 # crea i gruppi se non esistono
 # conta quanti layer ha scansionato e di quale tipo
 # ricordarsi che è un ordinamento alfabetico !!
