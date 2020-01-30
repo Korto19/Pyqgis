@@ -1,5 +1,8 @@
 # ALGORITMO DA CONSOLE - **Raggruppa i layer per tipo e li ordina per nome**
 
+## REQUISITI
+Insieme di layer (vettoriali, raster) senza raggruppamenti
+
 ##  Funzionalità
 Raggruppa i layer nella TOC per tipo creando i gruppi
 ed all'interno di ciascun gruppo li ordina alfabeticamente
