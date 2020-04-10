@@ -10,3 +10,4 @@ per nome.
 
 Di default ordina in maniera crescente, modificando `reverse=True` in
 `reverse=False` nella riga 57 si ottiene ordinamento decrescente.
+Se aggiunti nuovi layer basta rilanciarlo per riorganizzare il tutto.

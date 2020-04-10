@@ -1,13 +1,16 @@
+# ALGORITMI DA CONSOLE
+
 Nel documento:
 <!-- TOC -->
 
+- [ALGORITMI DA CONSOLE](#algoritmi-da-console)
 - [LAYOUT MULTI MAP](#layout-multi-map)
-    - [Elementi di partenza](#elementi-di-partenza)
-    - [SCRIPT](#script)
-        - [Script1  `01_Auto_gen_layer_and_thematize.py`](#script1--01_auto_gen_layer_and_thematizepy)
-        - [Script `02_Auto_composer_ multiple_map_layout.py`](#script-02_auto_composer_-multiple_map_layoutpy)
-        - [Dimensione delle mappe](#dimensione-delle-mappe)
-    - [FILE DI ESEMPIO](#file-di-esempio)
+  - [Elementi di partenza](#elementi-di-partenza)
+  - [SCRIPT](#script)
+    - [Script1  `01_Auto_gen_layer_and_thematize.py`](#script1-01autogenlayerandthematizepy)
+    - [Script `02_Auto_composer_ multiple_map_layout.py`](#script-02autocomposer-multiplemaplayoutpy)
+    - [Dimensione delle mappe](#dimensione-delle-mappe)
+  - [FILE DI ESEMPIO](#file-di-esempio)
 
 <!-- /TOC -->
 
