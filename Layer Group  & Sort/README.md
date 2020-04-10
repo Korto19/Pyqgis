@@ -1,4 +1,6 @@
-# ALGORITMO DA CONSOLE - **Raggruppa i layer per tipo e li ordina per nome**
+# ALGORITMO DA CONSOLE
+
+# Raggruppa i layer per tipo e li ordina per nome
 
 ## REQUISITI
 Insieme di layer (vettoriali, raster) senza raggruppamenti
