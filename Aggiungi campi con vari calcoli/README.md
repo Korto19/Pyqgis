@@ -25,4 +25,8 @@ La variazione % da 0 a un qualsiasi valore è indicata con 9999999
         - il valore della progressiva di partenza;
 		- ulteriore suffisso es: `lunghezza_prog` + `_gruppoA`;
         - campo con l'id del record utilizzato dall'ordinamento del calcolo;
+<<<<<<< HEAD
         - 5 decimali anzichè 3 se le % lo richiedessero".
+=======
+        - 5 decimali anzichè 3 se le % lo richiedessero".
+>>>>>>> b2f7d034f96a8b2d6964ecc06304a5ca14a42cb2
