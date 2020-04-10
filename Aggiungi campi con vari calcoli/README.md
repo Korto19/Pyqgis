@@ -5,6 +5,7 @@ Replica il layer corrente aggiungendo un nuovo campo con il risultato dei seguen
 * progressiva,
 * % sul totale,
 * media mobile,
+* media ponderata, [nella versione Calcoli]
 * variazione,
 * variazione % calcolata con ordinamento per id record
         
@@ -26,3 +27,4 @@ La variazione % da 0 a un qualsiasi valore è indicata con 9999999
 		- ulteriore suffisso es: `lunghezza_prog` + `_gruppoA`;
         - campo con l'id del record utilizzato dall'ordinamento del calcolo;
         - 5 decimali anzichè 3 se le % lo richiedessero".
+
