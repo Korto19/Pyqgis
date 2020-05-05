@@ -78,7 +78,7 @@ class CalcoliSuiCampiProcessingAlgorithm(QgsProcessingAlgorithm):
         Returns the name of the group this algorithm belongs to. This string
         should be localised.
         """
-        return self.tr('FG Beta')
+        return self.tr('FGscripts')
 
     def groupId(self):
         """
@@ -88,7 +88,7 @@ class CalcoliSuiCampiProcessingAlgorithm(QgsProcessingAlgorithm):
         contain lowercase alphanumeric characters only and no spaces or other
         formatting characters.
         """
-        return 'FG Beta'
+        return 'FGscripts'
 
     def shortHelpString(self):
         """
@@ -99,7 +99,7 @@ class CalcoliSuiCampiProcessingAlgorithm(QgsProcessingAlgorithm):
         return self.tr("Replica il layer aggiungendo un nuovo campo con: \n progressiva,\
          % sul totale,  media mobile, media ponderata, variazione, variazione % \ncalcolata con ordinamento per id record\
         \nIl campo generato ha lo stesso nome dell'origine più un suffisso automatico che richiama il calcolo es: 'lunghezza_prog'\
-        \nLa Media Ponderata è un indice e non genera layer risultante dando però errore\
+        \nLa Media Ponderata è un indice e non genera layer risultante\
         \nIl nuovo layer ha per nome Calc_timestamp\
         \nLA VARIAZIONE E LA VARIAZIONE % NECESSITANO DI LAYER NON TEMPORANEI\
         \nLa variazione % da 0 a un qualsiasi valore è indicata con 9999999\
@@ -187,6 +187,9 @@ class CalcoliSuiCampiProcessingAlgorithm(QgsProcessingAlgorithm):
             parameters,
             self.INPUT,
             context)
+        
+        source_vl = source.materialize(QgsFeatureRequest())
+        
         optional_start_value = self.parameterAsDouble(
             parameters,
             self.OPTIONAL_START_VALUE,
@@ -222,17 +225,17 @@ class CalcoliSuiCampiProcessingAlgorithm(QgsProcessingAlgorithm):
             result_field_name = "_" + result_field_name 
             
         if output_operation == '0':
-            result_field_name = "_prog" + result_field_name
+            result_field_name = "_prog" + result_field_name         #progressiva
         if output_operation == '1':
-            result_field_name = "_%_tot" + result_field_name
+            result_field_name = "_%_tot" + result_field_name        #percentuale
         if output_operation == '2':
-            result_field_name = "_mobile_av" + result_field_name
+            result_field_name = "_mobile_av" + result_field_name    #media mobile
         if output_operation == '3':
-            result_field_name = "_weight_av" + result_field_name
+            result_field_name = "_weight_av" + result_field_name    #indice media pesata
         if output_operation == '4':
-            result_field_name = "_delta" + result_field_name
+            result_field_name = "_delta" + result_field_name        #variazione
         if output_operation == '5':
-            result_field_name = "_delta%" + result_field_name
+            result_field_name = "_delta%" + result_field_name       #variazione percentuale
 
         if id_dec == 1:
             nd = 5
@@ -250,12 +253,12 @@ class CalcoliSuiCampiProcessingAlgorithm(QgsProcessingAlgorithm):
             self.OUTPUT,
             context, fields, source.wkbType(), source.sourceCrs())
            
-        feedback.pushInfo('Get features')
+        #feedback.pushInfo('Get features')
         features = source.getFeatures()
 
 
         # Running the processing algorithm
-        feedback.pushInfo('Calculate ' + output_operation +": "+ result_field_name)
+        feedback.pushInfo('Calculate ' + output_operation +": "+ result_field_name + '\n')
         
         if output_operation == '0':
             k = 0
@@ -284,9 +287,10 @@ class CalcoliSuiCampiProcessingAlgorithm(QgsProcessingAlgorithm):
         if output_operation == '4' or output_operation == '5':
             k = 0
             partial = 0
-            feedback.pushInfo (source)
+            #feedback.pushInfo (source)
             
         produttoria = 0
+        k=0
         
         # Read the layer and create output features
         for f in source.getFeatures():
@@ -304,13 +308,16 @@ class CalcoliSuiCampiProcessingAlgorithm(QgsProcessingAlgorithm):
                     partial = (f[operation_field_name] / sum_values)*100
                 
             if output_operation == '2':
-                partial = (partial * (k-1) + f[operation_field_name])/(k)
+                if k == 0:
+                    partial = partial + f[operation_field_name]
+                else:   
+                    partial = (partial * k + f[operation_field_name])/(k+1)
                 
             if output_operation == '3':
                 #feedback.pushInfo ('ci son passato ' + str(sum_weight))
-                produttoria = produttoria + (f[operation_field_name] * f[weight_field_name])
-                partial = produttoria
-                #feedback.pushInfo (str(partial))
+                produttoria = produttoria + (f[operation_field_name] * float(f[weight_field_name]))
+                partial = produttoria/sum_weight
+
             
             if output_operation == '4':
                 if k != 0:
@@ -334,17 +341,20 @@ class CalcoliSuiCampiProcessingAlgorithm(QgsProcessingAlgorithm):
                     partial=0
             k = k + 1
             
-            #feedback.pushInfo(str(produttoria))
-            
-            new_f.append(partial)
-            if id_calc == 1:
-                new_f.append(f.id())
-            new_feature.setAttributes(new_f)
-            sink.addFeature(new_feature, QgsFeatureSink.FastInsert)
+            if output_operation != '3':
+                new_f.append(partial)
+                if id_calc == 1:
+                    new_f.append(f.id())
+                new_feature.setAttributes(new_f)
+                sink.addFeature(new_feature, QgsFeatureSink.FastInsert)
         
-        feedback.pushInfo('\nValori : ' + operation_field_name)
-        feedback.pushInfo('Peso   : ' + weight_field_name)
-        feedback.pushInfo('\nMEDIA PONDERATA = ' + str(produttoria/sum_weight)+'\n')    
+        if output_operation == '3':
+            feedback.pushInfo ('MEDIA PONDERATA = ' + str(partial))
+            feedback.pushInfo('nValori : ' + operation_field_name)
+            feedback.pushInfo('nPeso   : ' + weight_field_name + '\n')
+ 
         
         if output_operation != '3':
             return {self.OUTPUT: dest_id}
+        else:
+            return {}
